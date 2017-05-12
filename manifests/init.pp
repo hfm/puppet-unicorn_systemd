@@ -2,7 +2,7 @@
 #
 # This class install and configure systemd unit files for unicorn
 #
-class unicorn_systemd (
+define unicorn_systemd (
   String $user,
   String $group,
   String $working_directory,
