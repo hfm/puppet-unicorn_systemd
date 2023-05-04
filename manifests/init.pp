@@ -15,14 +15,11 @@ define unicorn_systemd (
   String $service_name = 'unicorn'
 ) {
 
-  include ::systemd
-
   file { "/etc/systemd/system/${service_name}.service":
     ensure  => $ensure,
     content => template('unicorn_systemd/unicorn.service.erb'),
     owner   => 'root',
     group   => 'root',
-    notify  => Exec['systemctl-daemon-reload'],
   }
 
   service { $service_name:
