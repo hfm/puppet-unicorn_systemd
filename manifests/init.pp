@@ -16,13 +16,13 @@ define unicorn_systemd (
 ) {
 
   include ::systemd
-
+  include systemd::systemctl::daemon_reload
   file { "/etc/systemd/system/${service_name}.service":
     ensure  => $ensure,
     content => template('unicorn_systemd/unicorn.service.erb'),
     owner   => 'root',
     group   => 'root',
-    notify  => Exec['systemctl-daemon-reload'],
+    notify  => Class['systemd::systemctl::daemon_reload'],
   }
 
   service { $service_name:
